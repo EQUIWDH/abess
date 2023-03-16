@@ -252,7 +252,7 @@ class Metric {
         // 6.SIC for COX
         if (this->eval_type == 6) {
             return loss +
-                   this->ic_coef * log(double(train_n)) * log(double(train_n)) * algorithm->get_effective_number();
+                   this->ic_coef * log(double(train_n)) * log(double(train_n)) * algorithm->get_effective_number() * algorithm->get_beta_size();
         }
         if (this->raise_warning) {
             cout << "[warning] No available IC type for training. Use loss instead. "
