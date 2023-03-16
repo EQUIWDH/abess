@@ -249,6 +249,11 @@ class Metric {
                        (algorithm->get_train_loss() - algorithm->lambda_level * algorithm->beta.cwiseAbs2().sum()) +
                    this->ic_coef * log(double(N)) * log(log(double(train_n))) * algorithm->get_effective_number();
         }
+        // 6.SIC for COX
+        if (this->eval_type == 6) {
+            return loss +
+                   this->ic_coef * log(double(train_n)) * log(double(train_n)) * algorithm->get_effective_number();
+        }
         if (this->raise_warning) {
             cout << "[warning] No available IC type for training. Use loss instead. "
                  << "(E" << this->eval_type << "M" << algorithm->model_type << ")" << endl;
