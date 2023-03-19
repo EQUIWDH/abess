@@ -354,7 +354,7 @@ class bess_base(BaseEstimator):
                 eval_type_int = 4
             elif self.ic_type == "hic":
                 eval_type_int = 5
-            elif self.ictype == "sic_cox":
+            elif self.ictype == "sic":
                 eval_type_int = 6
             else:
                 raise ValueError(
