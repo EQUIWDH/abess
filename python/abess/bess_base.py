@@ -354,12 +354,12 @@ class bess_base(BaseEstimator):
                 eval_type_int = 4
             elif self.ic_type == "hic":
                 eval_type_int = 5
-            elif self.ictype == "sic":
+            elif self.ic_type == "sic":
                 eval_type_int = 6
             else:
                 raise ValueError(
-                    "ic_type should be \"aic\", \"bic\", \"ebic\",
-                    \"gic\", \"hic\" or \"sic for cox \".")
+                    "ic_type should be \"aic\", \"bic\", \"ebic\","
+                    " \"gic\", \"hic\" or \"sic\".")
         else:
             if self.cv_score == "test_loss":
                 eval_type_int = 0
