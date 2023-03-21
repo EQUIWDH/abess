@@ -290,7 +290,19 @@ class Metric {
             proba = proba.cwiseQuotient(Eigen::VectorXd::Ones(test_n) + proba);
             return -this->binary_auc_score(test_y_temp, proba);
         }
-        // 2. 3. negative AUC, One vs One/Rest (for multinomial)
+        // 2. c-index (for cox model)
+        if (this->eval_type == 4 && lgorithm->model_type == 4){
+            Eigen::VectorXd risk = test_X_A * beta_A + coef0 * Eigen::VectorXd::Ones(test_n);
+            pair_num = 0
+            coin = 0
+            for (int i = 1; i < test_n; i++){
+                 for (int j = 0; j < i; j++){
+                    if (test_y[i] == test_y[j] &&  )
+               
+        
+         }
+        }
+        // 3. 4. negative AUC, One vs One/Rest (for multinomial)
         if (algorithm->model_type == 6) {
             int M = test_y.cols();
             // compute probability
