@@ -254,9 +254,7 @@ class bess_base(BaseEstimator):
             if self.model_type == "Cox":
                 X = X[y[:, 0].argsort()]
                 y = y[y[:, 0].argsort()]
-                time = y[:, 0].reshape(-1)
-                y = y[:, 1].reshape(-1)
-
+  
             # Dummy y & classes
             if self.model_type == "Logistic":
                 y, self.classes_ = categorical_to_dummy(y.squeeze())
