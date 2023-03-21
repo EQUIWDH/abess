@@ -86,7 +86,7 @@ class Algorithm {
                       // to accelerate the iterative convergence of the splicing algorithm.
     T4 *x = NULL;
     T1 *y = NULL;
-    T1 *time = NULL;
+    T1 *time = NULL;           //only for cox
     T2 beta;                  // coefficients.
     Eigen::VectorXd bd;       // sacrifices.
     T3 coef0;                 // intercept.
