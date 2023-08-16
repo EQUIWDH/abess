@@ -115,6 +115,8 @@ class Algorithm {
     int sub_search;           // size of sub_searching in splicing
     int U_size;
 
+    double beta_range[2] = {-DBL_MAX, DBL_MAX};
+
     Algorithm() = default;
 
     virtual ~Algorithm(){};
@@ -161,6 +163,17 @@ class Algorithm {
     void update_train_mask(Eigen::VectorXi &train_mask) { this->train_mask = train_mask; }
 
     void update_exchange_num(int exchange_num) { this->exchange_num = exchange_num; }
+
+    void update_beta_range(double beta_low, double beta_high) {
+        if (beta_low > beta_high) {
+            this->beta_range[0] = -DBL_MAX;
+            this->beta_range[1] = DBL_MAX;
+        } else {
+            this->beta_range[0] = beta_low;
+            this->beta_range[1] = beta_high;
+        }
+        // std::cout << "beta range: " << beta_low << "," << beta_high << std::endl;
+    }
 
     virtual void update_tau(int train_n, int N) {
         if (train_n == 1) {
@@ -569,13 +582,13 @@ class Algorithm {
             Eigen::VectorXi U = Eigen::VectorXi::LinSpaced(N, 0, N - 1);
             Eigen::VectorXi U_ind = Eigen::VectorXi::LinSpaced(beta_size, 0, beta_size - 1);
             this->sacrifice(X, X_A, y, beta, beta_A, coef0, A, I, weights, g_index, g_size, N, A_ind, bd, U, U_ind, 0);
+            // A_init
+            for (int i = 0; i < A.size(); i++) {
+                bd(A(i)) = DBL_MAX / 2;
+            }
             // alway_select
             for (int i = 0; i < this->always_select.size(); i++) {
                 bd(this->always_select(i)) = DBL_MAX;
-            }
-            // A_init
-            for (int i = 0; i < A.size(); i++) {
-                bd(A(i)) = DBL_MAX - 1;
             }
         }
 
